@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { User, Donation, AppState, UserRole, DonationStatus, DonationCategory } from './types';
+import React, { useState, useEffect } from 'react';
+import { User, Donation, AppState, UserRole, DonationStatus } from './types';
 import { storageService } from './services/storageService';
 import { Layout } from './components/Layout';
 
-// Mock Pages
+// Pages
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
@@ -13,13 +13,13 @@ import { ReceiverDashboard } from './pages/ReceiverDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { PostDonationPage } from './pages/PostDonationPage';
 import { BrowseDonationsPage } from './pages/BrowseDonationsPage';
+import { AiAssistantPage } from './pages/AiAssistantPage';
 
 const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>(storageService.loadData());
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // Sync state to local storage whenever it changes
   useEffect(() => {
     storageService.saveData(appState);
   }, [appState]);
@@ -118,6 +118,8 @@ const App: React.FC = () => {
           user={appState.currentUser}
           onNavigate={setCurrentPage}
         />;
+      case 'ai-assistant':
+        return <AiAssistantPage />;
       case 'dashboard':
         if (!appState.currentUser) return <LoginPage onLogin={handleLogin} error={null} onNavigate={setCurrentPage} />;
         if (appState.currentUser.role === UserRole.DONOR) {

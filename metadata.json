@@ -1,5 +1,8 @@
 {
-  "name": "Copy of GiveBound - Resource Sharing Platform",
+  "name": "GiveBound - Resource Sharing Platform",
   "description": "A community-driven platform connecting donors with individuals and NGOs in need to share food, clothes, books, and medicine.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
 }
